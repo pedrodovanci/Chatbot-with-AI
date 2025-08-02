@@ -1,0 +1,703 @@
+{
+  "convenios": [
+    {
+      "convenio": "amafresp",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "US"
+      ],
+      "observacoes": "precisa de foto do pedido e cartão. Autoriza em 3 dias."
+    },
+    {
+      "convenio": "amil/golden cross",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "RX",
+        "US",
+        "RM de mama",
+        "RM de mastoide",
+        "RM de face",
+        "RM de órbita",
+        "Angio-TC"
+      ],
+      "observacoes": "precisa de foto do pedido e cartão. Autoriza em 10 dias."
+    },
+    {
+      "convenio": "assomim",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX"
+      ],
+      "nao_atende": [
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "autorização e pagamento feitos no convênio."
+    },
+    {
+      "convenio": "apas andradina",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente deve trazer autorização do convênio."
+    },
+    {
+      "convenio": "apas aracatuba",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "US"
+      ],
+      "nao_atende": [
+        "RX",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente deve trazer autorização do convênio."
+    },
+    {
+      "convenio": "apas barretos",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "US"
+      ],
+      "observacoes": "paciente deve trazer autorização do convênio."
+    },
+    {
+      "convenio": "apas fernandopolis",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "precisa de foto do pedido e cartão para autorizar."
+    },
+    {
+      "convenio": "aresp",
+      "atende": [
+        "RM"
+      ],
+      "nao_atende": [
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "pagamento feito na clínica."
+    },
+    {
+      "convenio": "assefaz",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "US"
+      ],
+      "observacoes": "precisa de foto do pedido e cartão. Autoriza em 2 dias."
+    },
+    {
+      "convenio": "austa ocupacional",
+      "atende": [
+        "EEG"
+      ],
+      "nao_atende": [
+        "RM",
+        "TC",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "só agendar, paciente traz apenas o pedido."
+    },
+    {
+      "convenio": "bradesco",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX"
+      ],
+      "nao_atende": [
+        "US"
+      ],
+      "observacoes": "precisa de foto do pedido e cartão. TC/RM autorizam em 4 dias, demais exames em 1 dia."
+    },
+    {
+      "convenio": "cabesp",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG"
+      ],
+      "nao_atende": [
+        "RX",
+        "US"
+      ],
+      "observacoes": "precisa de foto do pedido e cartão. Autoriza em 1 dia."
+    },
+    {
+      "convenio": "cassi",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "precisa de foto do pedido e cartão. Autoriza em 1 dia."
+    },
+    {
+      "convenio": "cemerp - probem",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "clinica bady",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "exame com contraste tem custo de R$ 120,00. Paciente traz autorização."
+    },
+    {
+      "convenio": "clinica dr para todos",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "exame com contraste tem custo de R$ 120,00. Paciente traz autorização."
+    },
+    {
+      "convenio": "convida",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "pagamento feito na clínica."
+    },
+    {
+      "convenio": "ocupacional dr americo",
+      "atende": [
+        "EEG"
+      ],
+      "nao_atende": [
+        "RM",
+        "TC",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente vem com guia do pedido/encaminhamento."
+    },
+    {
+      "convenio": "economus",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX"
+      ],
+      "nao_atende": [
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "EEG e angio RM cervical demoram 21 dias úteis. Demais exames: foto do pedido e cartão. Autoriza em 10 dias."
+    },
+    {
+      "convenio": "frutal licitação",
+      "atende": [
+        "ENMG"
+      ],
+      "nao_atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente deve trazer guia autorizada."
+    },
+    {
+      "convenio": "hapvida",
+      "atende": [
+        "RM",
+        "TC",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "Angio-RM",
+        "Angio-TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "observacoes": "paciente deve trazer guia autorizada."
+    },
+    {
+      "convenio": "hb",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "ENMG",
+        "US"
+      ],
+      "observacoes": "paciente deve trazer guia autorizada."
+    },
+    {
+      "convenio": "iamspe",
+      "atende": [
+        "RM",
+        "Angio-TC"
+      ],
+      "nao_atende": [
+        "TC (exceto Angio-TC)",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente deve trazer guia autorizada e verificar se está de fato autorizado."
+    },
+    {
+      "convenio": "jj medicina trabalho",
+      "atende": [
+        "EEG"
+      ],
+      "nao_atende": [
+        "RM",
+        "TC",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente deve trazer autorização."
+    },
+    {
+      "convenio": "life empresarial",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "precisa de foto da guia e carteirinha. Autoriza em 3 dias."
+    },
+    {
+      "convenio": "mednorte",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "medmais",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "mutuarias",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "metra",
+      "atende": [
+        "EEG"
+      ],
+      "nao_atende": [
+        "RM",
+        "TC",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente traz autorização."
+    },
+    {
+      "convenio": "mediservice",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "RX",
+        "US"
+      ],
+      "observacoes": "EEG: somente mapeamento cerebral. Para autorizar pedir foto do cartão e pedido, leva 1 dia para autorizar."
+    },
+    {
+      "convenio": "omint",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "ENMG",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "pedir foto da carteirinha e do pedido."
+    },
+    {
+      "convenio": "padre albino",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente traz autorização."
+    },
+    {
+      "convenio": "partmed",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "contraste cobrar R$ 120,00. Paciente traz autorização."
+    },
+    {
+      "convenio": "prefeituras",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica, ou a prefeitura realiza o depósito 1 dia antes do exame agendado."
+    },
+    {
+      "convenio": "postal saude",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "pedir foto do pedido e carteirinha, leva 3 dias para autorizar. Exceto RX que leva 1 dia para autorizar."
+    },
+    {
+      "convenio": "proasa",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG"
+      ],
+      "nao_atende": [
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "pedir foto da carteirinha e pedido, leva 3 dias para autorizar."
+    },
+    {
+      "convenio": "prever convenio",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "exames com contraste cobrar valor de R$ 120,00. Paciente traz autorização."
+    },
+    {
+      "convenio": "prever",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "pronto saude",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente tem que vir com guia de autorização."
+    },
+    {
+      "convenio": "polimed",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "rede mil",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [],
+      "observacoes": "paciente paga na clínica."
+    },
+    {
+      "convenio": "são domingos",
+      "atende": [
+        "RM",
+        "TC"
+      ],
+      "nao_atende": [
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente traz autorização."
+    },
+    {
+      "convenio": "sansaude",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "POLISSONOGRAFIA"
+      ],
+      "nao_atende": [
+        "RX",
+        "US"
+      ],
+      "observacoes": "paciente traz autorização."
+    },
+    {
+      "convenio": "sabesprev/vivest",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "pedir foto do pedido e carteirinha do convênio, leva 1 dia para autorizar."
+    },
+    {
+      "convenio": "sompo saude",
+      "atende": [
+        "RM"
+      ],
+      "nao_atende": [
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente traz autorização."
+    },
+    {
+      "convenio": "sulamerica",
+      "atende": [
+        "TC",
+        "EEG",
+        "ENMG"
+      ],
+      "nao_atende": [
+        "RM",
+        "RX",
+        "US",
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "pedir foto da carteirinha e do pedido, leva 1 dia para autorizar."
+    },
+    {
+      "convenio": "unifamilia",
+      "atende": [
+        "RM",
+        "TC",
+        "EEG",
+        "ENMG",
+        "RX",
+        "US"
+      ],
+      "nao_atende": [
+        "POLISSONOGRAFIA"
+      ],
+      "observacoes": "paciente paga na clínica."
+    }
+  ],
+  "aviso_geral": "[convenio - unimed]\natendemos: RM,TC,EEG,ENMG,RX,US,POLISSONOGRAFIA.\nOBSERVACOES: unimed com carteirinha 0030 não realizamos US.\n\n-regras de convênio mudam diariamente.\n-após sua resposta peça para o usuário checar se há alguma informação mais recente."
+}

@@ -1,0 +1,73 @@
+{
+  "modalidade": "TC",
+  "perguntas_obrigatorias_agendamento": [
+    "Informar convênio.",
+    "Nome completo.",
+    "Data de nascimento, peso e altura.",
+    "Tem alergia a medicamentos? Quais? Qual a reação alérgica?",
+    "Tem alergia ao contraste? Qual exame causou a reação e qual foi a reação?",
+    "Tem asma, bronquite ou diabetes?",
+    "Já foi operado(a) da região do exame?"
+  ],
+  "orientacoes_gerais": [
+    "Maca da tomografia suporta até 180 kg.",
+    "Não realizamos os seguintes exames:",
+    "Arteriografia",
+    "TC de veias pulmonares",
+    "TC coronariana",
+    "TC de tórax para escore de cálcio",
+    "PETSCAN",
+    "TC odontológica (parte dentária)",
+    "Escanometria digital (cód. 41001192)",
+    "TC de joelho com TAGT (princípio de Lyon): realizamos, inclusive particular (valor igual).",
+    "Exames com contraste em crianças: agendar até as 15h.",
+    "Não precisa de jejum para exames de TC em geral.",
+    "Chegar com 30 minutos de antecedência.",
+    "Trazer:",
+    "Pedido médico original",
+    "Documento com foto",
+    "Carteirinha do convênio/SUS (se tiver)",
+    "Exames anteriores (RX, USG, RM, TC)"
+  ],
+  "preparo_abdome_total_vias_urinarias": [
+    "Beber bastante líquido antes do exame.",
+    "Estar com a bexiga cheia.",
+    "Não precisa de jejum."
+  ],
+  "preparo_alergico_contraste": {
+    "confirmar_com_medico": true,
+    "prescricao": [
+      "Confirmar necessidade de preparo antialérgico com base na reação prévia e no exame atual.",
+      "Prescrição:",
+      "Prednisona 20mg: 2 comprimidos 13h, 7h e 1h antes do exame.",
+      "Difenidramina 50mg --ou-- Fexofenadina 180mg: 1 comprimido 1h antes do exame."
+    ]
+  },
+  "exames_contraste_obrigatorio": [
+    "Crânio",
+    "Tórax",
+    "Abdome superior",
+    "Abdome total",
+    "Pelve",
+    "Pescoço",
+    "Órbitas",
+    "Todas as angiotomografias"
+  ],
+  "horarios_contraste": {
+    "Segunda e quarta": "07h às 21h",
+    "Terça e quinta": "07h às 19h",
+    "Sexta-feira": "07h às 17h30",
+    "Sábado": "08h às 12h"
+  },
+  "sedacao_codigos_autorizacao": {
+    "criterio_idade": "Crianças acima de 3 anos:",
+    "codigos": {
+      "1_exame": "31602274",
+      "2_ou_mais": [
+        "31602274",
+        "31602312"
+      ]
+    },
+    "exemplos": []
+  }
+}

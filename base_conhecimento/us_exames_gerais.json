@@ -1,0 +1,233 @@
+[
+  {
+    "exame": "US - ABDOME TOTAL",
+    "codigo": "40901122",
+    "modalidade": "US",
+    "preparo": [
+      "Jejum de 6 a 8 horas"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ABDOME SUPERIOR",
+    "codigo": "40901130",
+    "modalidade": "US",
+    "preparo": [
+      "Jejum de 6 a 8 horas"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ABDOME INFERIOR MASCULINO",
+    "codigo": "40901173",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame e não urinar."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ABDOME INFERIOR FEMININO",
+    "codigo": "40901181",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame e não urinar."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - APARELHO URINÁRIO",
+    "codigo": "40901769",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame e não urinar."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - APARELHO URINÁRIO MASCULINO",
+    "codigo": "40901165",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame e não urinar."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - APARELHO URINÁRIO FEMININO",
+    "codigo": "40901157",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame e não urinar."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ENDOVAGINAL / TRANSVAGINAL",
+    "codigo": "40901335",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga vazia. Esvaziar completamente antes do exame."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - CRÂNIO PARA CRIANÇA",
+    "codigo": "40901610",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ARTICULAR",
+    "codigo": "40901220",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ORGÃOS SUPERFICIAIS: CRÂNIO, ESCROTO, PÊNIS, TIREOIDE, AXILA",
+    "codigo": "40901203",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - PANTURRILHA, PAREDE ABDOMINAL, PARTES MOLES, GLÚTEO, TORÁCICO EXTRACARDÍACO",
+    "codigo": "40901211",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - ESCÁPULA, CERVICAL, AXILAS, PAREDE ABDOMINAL",
+    "codigo": "40901211",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - GLÂNDULAS SALIVARES",
+    "codigo": "40901033",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - GLOBO OCULAR BILATERAL",
+    "codigo": "40901017",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - MAMAS",
+    "codigo": "40901218",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum"
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - OBSTÉTRICA 1º TRIMESTRE",
+    "codigo": "40901297",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - OBSTÉTRICA COM TRANSLUCÊNCIA NUCAL",
+    "codigo": "40901211",
+    "modalidade": "US",
+    "preparo": [
+      "Bexiga cheia. Ingerir 6 copos de água 1 hora antes do exame.",
+      "",
+      "Não precisa de preparo.",
+      "Não precisa de preparo."
+    ],
+    "descricao": null,
+    "realizado_por": [
+      "Dr. Frederico"
+    ],
+    "observacoes": [
+      "",
+      "Trazer exames anteriores de próstata e resultado de PSA.",
+      "Verificar se o convênio é credenciado no sistema (XClinic).",
+      "Agendar conforme disponibilidade médica.",
+      "Nenhuma orientação adicional."
+    ]
+  },
+  {
+    "exame": "US - TRANSVAGINAL / ENDOVAGINAL",
+    "codigo": "40901300",
+    "modalidade": "US",
+    "preparo": [
+      "Vazio vesical (não urinar antes do exame)."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  },
+  {
+    "exame": "US - GLOBO OCULAR COM DOPPLER COLORIDO (BILATERAL)",
+    "codigo": "40901033",
+    "modalidade": "US",
+    "preparo": [
+      "Nenhum."
+    ],
+    "descricao": null,
+    "realizado_por": null,
+    "observacoes": null
+  }
+]

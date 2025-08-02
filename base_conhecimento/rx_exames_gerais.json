@@ -1,0 +1,11 @@
+{
+  "modalidade": "RX",
+  "regras_gerais_rx": {
+    "nao_realizamos": [
+      "- Não realizamos: RX com contraste, RX panorâmica de mandíbula, esôfago, urografia, deglutograma, vias lacrimais (dacriocistografia) e uretrocistografia."
+    ],
+    "registro_lateralidade": "",
+    "tabela_registro": ""
+  },
+  "exames": []
+}

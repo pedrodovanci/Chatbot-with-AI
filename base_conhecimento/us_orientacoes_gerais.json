@@ -1,0 +1,31 @@
+{
+  "modalidade": "US",
+  "orientacoes_gerais": [
+    "A maca do ultrassom suporta até 180kg.",
+    "Evitar agendar pacientes acamados com restrição de mobilidade."
+  ],
+  "exames_nao_realizados": [
+    "Ultrassom morfológico de 1º, 2º e 3º trimestre;",
+    "Ultrassom de períneo;",
+    "Ultrassom transvaginal com estudo de endométrio (fazer transvaginal comum);",
+    "Quando solicitado \"ultrassom de abdome total e vias urinárias\":",
+    "Exames de ultrassom obstétrico com Doppler:",
+    "Só realizamos se o pedido mencionar apenas “ultrassom obstétrico” (sem o Doppler).",
+    "**Ultrassom transvaginal com preparo intestinal**:"
+  ],
+  "substituicoes_de_pedidos": {},
+  "restricoes_convenios": {},
+  "preparo_transvaginal_intestinal": [],
+  "doppler_membros": {
+    "orientacoes": [
+      "Agendar dois horários.",
+      "Verificar sempre se o pedido é arterial, venoso ou ambos.",
+      "Exames com necessidade de contraste, suspeita de trombose ou vascularização profunda:",
+      "Solicitar o pedido médico antecipadamente e encaminhar à supervisão."
+    ],
+    "responsaveis": [
+      "Informar a equipe responsável: Dra. Carla ou Dra. Erika."
+    ]
+  },
+  "encaminhamento_supervisao": []
+}

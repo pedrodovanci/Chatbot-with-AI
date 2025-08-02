@@ -1,0 +1,91 @@
+{
+  "modalidade": "Polissonografia",
+  "nome_exame": "Polissonografia",
+  "codigo_principal": "40901033",
+  "descricao_operacional": " - Resultado: disponível em até 5 dias úteis. **Não há possibilidade de antecipar.** - O paciente deve retornar no **dia seguinte às 07h** para retirada do aparelho. - **Chegar até às 18h** no dia do exame. - **Não pode vir de moto.**",
+  "recomendacoes": [
+    ". Lavar o cabelo com shampoo ou sabão. **Não usar condicionador, gel, creme, óleo ou produto sem enxágue.** O cabelo deve estar seco.",
+    ". Usar camisa com botão na frente ou roupa bem larga. **Não pode vir com blusa apertada.**",
+    ". Não ingerir bebida alcoólica no dia do exame.",
+    ". Alimentação normal (fica a critério do cliente jantar antes ou após a colocação do aparelho).",
+    ". **Remover o esmalte de pelo menos um dos dedos da mão esquerda.**"
+  ],
+  "orientacoes_crianca": [
+    "Apenas crianças **acima de 10 anos** são atendidas.",
+    "Para menores de 10 anos, agendar na CIRP: (17) 3353-2382 ou WhatsApp (17) 99178-5143.",
+    "**Não deixar a criança dormir durante o dia do exame.**"
+  ],
+  "observacoes": [
+    "Menores de 18 anos devem estar acompanhados por um responsável.",
+    "Maiores de 60 anos também precisam de acompanhante.",
+    "Guias, pedidos e autorizações são de responsabilidade do paciente.",
+    "**Não administrar medicamentos antes, durante ou após o exame.**"
+  ],
+  "variacoes": [],
+  "valores_particulares": {
+    "particular": 780.0,
+    "prever_ou_mutuaria": 700.0
+  },
+  "convenios_credenciados": [
+    {
+      "nome": "AMIL",
+      "instrucoes_autorizacao": "Enviar foto para autorizar."
+    },
+    {
+      "nome": "AUSTA CLÍNICAS",
+      "instrucoes_autorizacao": "Ver no site (login: borgesadriana / senha: mo123456)."
+    },
+    {
+      "nome": "APAS ADRADINA",
+      "instrucoes_autorizacao": "Trazer autorizado."
+    },
+    {
+      "nome": "BEM SAÚDE",
+      "instrucoes_autorizacao": "Ver no site (login: 7371 / senha: 7371)."
+    },
+    {
+      "nome": "BRADESCO",
+      "instrucoes_autorizacao": "Enviar foto para autorizar."
+    },
+    {
+      "nome": "CABESP",
+      "instrucoes_autorizacao": "Mandar foto do pedido + carteirinha via WhatsApp."
+    },
+    {
+      "nome": "CASSI",
+      "instrucoes_autorizacao": "Enviar foto para autorizar."
+    },
+    {
+      "nome": "CLÍNICA DR. PARA TODOS",
+      "instrucoes_autorizacao": "Trazer autorizado."
+    },
+    {
+      "nome": "HB SAÚDE",
+      "instrucoes_autorizacao": "Ver no site (login: lucas.ro / senha: Moacir@2025)."
+    },
+    {
+      "nome": "MEDISERVICE",
+      "instrucoes_autorizacao": "Enviar foto para autorizar."
+    },
+    {
+      "nome": "PARTMED MIRASSOL",
+      "instrucoes_autorizacao": "Trazer autorizado."
+    },
+    {
+      "nome": "POSTAL SAÚDE",
+      "instrucoes_autorizacao": "Enviar foto para autorizar."
+    },
+    {
+      "nome": "SANSAUDE",
+      "instrucoes_autorizacao": "Vem com guia autorizada."
+    },
+    {
+      "nome": "SAÚDE CAIXA",
+      "instrucoes_autorizacao": "Enviar foto para autorizar."
+    },
+    {
+      "nome": "UNIMED",
+      "instrucoes_autorizacao": "Ver no site do convênio."
+    }
+  ]
+}

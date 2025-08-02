@@ -1,0 +1,39 @@
+{
+  "modalidade": "ENMG",
+  "perguntas_agendamento": [
+    "Informar convênio.",
+    "Nome completo.",
+    "Data de nascimento, peso e altura.",
+    "Faz uso de medicamentos anticoagulantes?",
+    "Tem marcapasso ou cardiodesfibrilador?"
+  ],
+  "instrucoes_agendamento": [
+    "MACA do ENMG suporta até 180kg.",
+    "Agendar apenas pacientes acima de 3 anos.",
+    "Pedir foto do pedido médico via WhatsApp para todos os exames do convênio Austa.",
+    "Pacientes com neuroestimulador (DBS): instruir a trazer o celular desligado (não pode ter app ativo que desligue o estimulador).",
+    "Pacientes com cardiodesfibrilador: só pode realizar se estiver desligado.",
+    "Pacientes com marcapasso podem realizar se houver autorização médica prévia. Anotar no agendamento.",
+    "NÃO agendar exames de: nervo pudendo, laringe, genitoperineal, potencial evocado.",
+    "NÃO agendar mais de uma criança no mesmo horário. Se tiver um exame infantil, bloquear o segundo horário.",
+    "Prolongado acima de 2h: bloquear dois horários (Ex: 10h → bloquear 10h45 e 11h30).",
+    "Se for criança: somente a partir de 5 anos."
+  ],
+  "orientacoes_crianca": [
+    "Crianças só podem fazer o exame a partir de 8 anos.",
+    "Caso a criança seja muito agitada: orientar o responsável a procurar o médico para possível medicação.",
+    "Nunca orientar o uso de medicamento por conta própria."
+  ],
+  "instrucoes_paciente": [
+    "Chegar 30 minutos antes do exame.",
+    "Trazer pedido médico original, RG, CPF ou CNH, carteirinha do convênio e do SUS (se tiver).",
+    "Pele deve estar limpa e seca (sem óleo, sem hidratante, sem protetor solar).",
+    "Evitar roupas apertadas nos braços e pernas no dia do exame."
+  ],
+  "observacoes": [
+    "Exame feito por médico especialista.",
+    "Avaliação da atividade elétrica de nervos e músculos, feita com eletrodos colocados na pele.",
+    "Não realizamos ENMG com sedação."
+  ],
+  "exames": []
+}
