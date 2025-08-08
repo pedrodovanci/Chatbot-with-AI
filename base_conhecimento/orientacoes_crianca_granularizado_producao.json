@@ -1,0 +1,94 @@
+[
+  {
+    "modalidade": "EEG",
+    "exame": "Orientações para crianças - EEG",
+    "observacoes_adicionais": {
+      "orientacoes_crianca": [
+        "Crianças de até 3 anos devem realizar EEG no horário do sono.",
+        "A criança deve permanecer em repouso durante o exame.",
+        "Se a criança for agitada, o responsável deve procurar orientação médica para prescrição de medicamento.",
+        "Nunca orientar medicação diretamente aos responsáveis.",
+        "Nunca agendar duas crianças no mesmo horário.",
+        "EEG prolongado em criança somente a partir de 5 anos.",
+        "Se houver dificuldade para manter a criança calma, o médico pode avaliar a necessidade de medicação.",
+        "É importante que a criança esteja tranquila para a realização do EEG.",
+        "Em caso de agitação, não cabe à clínica indicar calmantes. Essa decisão é exclusivamente médica."
+      ]
+    }
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Orientações para crianças - ENMG",
+    "observacoes_adicionais": {
+      "orientacoes_crianca": [
+        "O exame só deve ser agendado para crianças acima de 3 anos.",
+        "ENMG prolongado só pode ser realizado em crianças a partir de 5 anos.",
+        "Crianças de até 3 anos devem ser agendadas preferencialmente no horário do sono.",
+        "A criança deve permanecer calma durante o exame.",
+        "Se a criança for agitada ou não colaborar, o responsável deve procurar orientação médica.",
+        "Nunca orientar o uso de medicação sem prescrição médica.",
+        "Nunca agendar duas crianças no mesmo horário.",
+        "Em casos em que for necessária medicação para acalmar, apenas o médico poderá avaliar e prescrever.",
+        "A decisão sobre o uso de calmantes deve ser feita exclusivamente por um profissional médico."
+      ]
+    }
+  },
+  {
+    "modalidade": "Polissonografia",
+    "exame": "Orientações para crianças - Polissonografia",
+    "observacoes_adicionais": {
+      "orientacoes_crianca": [
+        "Não são permitidos brinquedos grandes ou com luzes durante o exame.",
+        "A criança deve estar acompanhada de um responsável durante toda a noite.",
+        "Evitar cochilos durante o dia do exame.",
+        "Se a criança tiver dificuldades para dormir ou se manter tranquila, é necessário conversar com o médico responsável.",
+        "Não recomendamos o uso de medicação sem orientação médica.",
+        "Qualquer decisão sobre calmantes deve partir do médico assistente."
+      ]
+    }
+  }
+  ,
+{
+  "modalidade": "RM",
+  "exame": "Orientações para crianças - Ressonância Magnética",
+  "observacoes_adicionais": {
+    "orientacoes_crianca": [
+      "A criança deve estar calma durante a ressonância magnética.",
+      "Se a criança for muito agitada, o médico pode avaliar a necessidade de sedação.",
+      "Nunca administrar sedação sem orientação médica.",
+      "A decisão sobre sedação infantil deve ser exclusivamente médica.",
+      "Evitar cochilos antes do exame, caso seja necessário realizar com sono natural.",
+      "Crianças pequenas devem ir acompanhadas de um responsável durante o exame."
+    ]
+  }
+},
+{
+  "modalidade": "TC",
+  "exame": "Orientações para crianças - Tomografia Computadorizada",
+  "observacoes_adicionais": {
+    "orientacoes_crianca": [
+      "A criança precisa permanecer imóvel durante a tomografia.",
+      "Se houver dificuldade de colaboração, o médico pode indicar sedação.",
+      "Nunca orientar uso de medicação por conta própria.",
+      "A indicação de sedação para crianças é uma decisão médica.",
+      "Crianças devem estar acompanhadas durante o exame por um responsável legal.",
+      "Evite alimentos sólidos caso o exame requeira sedação (confirmar com o agendamento)."
+    ]
+  }
+},
+{
+  "modalidade": "US",
+  "exame": "Orientações para crianças - Ultrassonografia",
+  "observacoes_adicionais": {
+    "orientacoes_crianca": [
+      "Crianças devem estar acompanhadas por um responsável durante o exame.",
+      "Alguns exames exigem jejum ou bexiga cheia — confirmar no agendamento.",
+      "Se a criança for muito agitada, o responsável deve informar ao agendamento.",
+      "A decisão sobre uso de calmantes é exclusiva do médico pediatra.",
+      "Nunca oferecer remédios calmantes sem orientação médica.",
+      "Para ultrassonografias com preparo, siga rigorosamente o que for orientado pelo setor de marcação."
+    ]
+  }
+}
+
+]

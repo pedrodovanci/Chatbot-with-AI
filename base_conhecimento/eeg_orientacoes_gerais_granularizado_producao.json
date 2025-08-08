@@ -1,0 +1,182 @@
+[
+  {
+    "modalidade": "EEG",
+    "exame": ": EEG de rotina",
+    "codigo": "41103710",
+    "realizado": true,
+    "preparo": [
+      "Cabelo limpo e seco: sem gel, sem creme, sem óleo.",
+      "Não ingerir bebida alcoólica 24h antes do exame."
+    ],
+    "descricao": " - Exame que registra atividade elétrica cerebral espontânea, captada por eletrodos colocados no couro cabeludo. - Pode ser utilizado em todas as idades, de recém-nascidos a idosos. - Útil para: - Diagnóstico e acompanhamento de epilepsia. - Distúrbios da consciência. - Avaliação de sequelas neurológicas. - Monitoramento em UTIs e comatosos. - Avaliação de encefalopatias metabólicas, degenerativas e psiquiátricas.",
+    "descricao_execucao": [
+      "Colocação de eletrodos no couro cabeludo com pasta condutora.",
+      "O paciente deve permanecer imóvel e com olhos fechados.",
+      "O EEG registra a atividade elétrica espontânea durante vigília (acordado) e, se possível, durante o sono."
+    ],
+    "medicos_envolvidos": [],
+    "sinonimos": [
+      ": eeg de rotina"
+    ],
+    "observacoes_adicionais": {
+      "instrucoes_gerais": " - Maca do EEG suporta até 180 kg. - Não realizamos: EEG com eletrodos especiais, EEG com foto estímulo (prova de ativação), HOLTER EEG, EEG com sedação e potencial evocado. - EEG prolongado acima de 1h → bloquear 1 horário a mais. Ex: 10h → bloquear 10h45. - EEG prolongado acima de 2h → bloquear 2 horários a mais. Ex: 10h → bloquear 10h45 e 11h30. - EEG prolongado em criança → somente a partir de 5 anos.",
+      "finalizacao_paciente": [
+        "Trazer pedido médico original.",
+        "Levar RG, CPF ou CNS, carteirinha do convênio/SUS (se tiver).",
+        "Não ingerir bebida alcoólica 24h antes do exame."
+      ],
+      "perguntas_agendamento": [
+        "Informar convênio.",
+        "Nome completo.",
+        "Data de nascimento, peso e altura.",
+        "Tem aplique ou tintura recente? (Pode interferir no exame)",
+        "Está indicado \"Foto estímulo\" na guia?"
+      ],
+      "orientacoes_crianca": ""
+    }
+  },
+  {
+    "modalidade": "EEG",
+    "exame": ": EEG quantitativo (mapeamento cerebral)",
+    "codigo": "41103728",
+    "realizado": true,
+    "preparo": [
+      "Cabelo limpo e seco: sem gel, sem creme, sem óleo.",
+      "Não ingerir bebida alcoólica 24h antes do exame."
+    ],
+    "descricao": " - Exame que registra atividade elétrica cerebral espontânea, captada por eletrodos colocados no couro cabeludo. - Pode ser utilizado em todas as idades, de recém-nascidos a idosos. - Útil para: - Diagnóstico e acompanhamento de epilepsia. - Distúrbios da consciência. - Avaliação de sequelas neurológicas. - Monitoramento em UTIs e comatosos. - Avaliação de encefalopatias metabólicas, degenerativas e psiquiátricas.",
+    "descricao_execucao": [
+      "Colocação de eletrodos no couro cabeludo com pasta condutora.",
+      "O paciente deve permanecer imóvel e com olhos fechados.",
+      "O EEG registra a atividade elétrica espontânea durante vigília (acordado) e, se possível, durante o sono."
+    ],
+    "medicos_envolvidos": [],
+    "sinonimos": [
+      ": eeg quantitativo (mapeamento cerebral)"
+    ],
+    "observacoes_adicionais": {
+      "instrucoes_gerais": " - Maca do EEG suporta até 180 kg. - Não realizamos: EEG com eletrodos especiais, EEG com foto estímulo (prova de ativação), HOLTER EEG, EEG com sedação e potencial evocado. - EEG prolongado acima de 1h → bloquear 1 horário a mais. Ex: 10h → bloquear 10h45. - EEG prolongado acima de 2h → bloquear 2 horários a mais. Ex: 10h → bloquear 10h45 e 11h30. - EEG prolongado em criança → somente a partir de 5 anos.",
+      "finalizacao_paciente": [
+        "Trazer pedido médico original.",
+        "Levar RG, CPF ou CNS, carteirinha do convênio/SUS (se tiver).",
+        "Não ingerir bebida alcoólica 24h antes do exame."
+      ],
+      "perguntas_agendamento": [
+        "Informar convênio.",
+        "Nome completo.",
+        "Data de nascimento, peso e altura.",
+        "Tem aplique ou tintura recente? (Pode interferir no exame)",
+        "Está indicado \"Foto estímulo\" na guia?"
+      ],
+      "orientacoes_crianca": ""
+    }
+  },
+  {
+    "modalidade": "EEG",
+    "exame": ": EEG especial (registro intensivo, monitor estendido, prolongado) – POR HORA",
+    "codigo": "41103736",
+    "realizado": true,
+    "preparo": [
+      "Cabelo limpo e seco: sem gel, sem creme, sem óleo.",
+      "Não ingerir bebida alcoólica 24h antes do exame."
+    ],
+    "descricao": " - Exame que registra atividade elétrica cerebral espontânea, captada por eletrodos colocados no couro cabeludo. - Pode ser utilizado em todas as idades, de recém-nascidos a idosos. - Útil para: - Diagnóstico e acompanhamento de epilepsia. - Distúrbios da consciência. - Avaliação de sequelas neurológicas. - Monitoramento em UTIs e comatosos. - Avaliação de encefalopatias metabólicas, degenerativas e psiquiátricas.",
+    "descricao_execucao": [
+      "Colocação de eletrodos no couro cabeludo com pasta condutora.",
+      "O paciente deve permanecer imóvel e com olhos fechados.",
+      "O EEG registra a atividade elétrica espontânea durante vigília (acordado) e, se possível, durante o sono."
+    ],
+    "medicos_envolvidos": [],
+    "sinonimos": [
+      ": eeg especial (registro intensivo, monitor estendido, prolongado) – por hora"
+    ],
+    "observacoes_adicionais": {
+      "instrucoes_gerais": " - Maca do EEG suporta até 180 kg. - Não realizamos: EEG com eletrodos especiais, EEG com foto estímulo (prova de ativação), HOLTER EEG, EEG com sedação e potencial evocado. - EEG prolongado acima de 1h → bloquear 1 horário a mais. Ex: 10h → bloquear 10h45. - EEG prolongado acima de 2h → bloquear 2 horários a mais. Ex: 10h → bloquear 10h45 e 11h30. - EEG prolongado em criança → somente a partir de 5 anos.",
+      "finalizacao_paciente": [
+        "Trazer pedido médico original.",
+        "Levar RG, CPF ou CNS, carteirinha do convênio/SUS (se tiver).",
+        "Não ingerir bebida alcoólica 24h antes do exame."
+      ],
+      "perguntas_agendamento": [
+        "Informar convênio.",
+        "Nome completo.",
+        "Data de nascimento, peso e altura.",
+        "Tem aplique ou tintura recente? (Pode interferir no exame)",
+        "Está indicado \"Foto estímulo\" na guia?"
+      ],
+      "orientacoes_crianca": ""
+    }
+  },
+  {
+    "modalidade": "EEG",
+    "exame": ": EEG vigil + sono (apenas com pedido médico)",
+    "codigo": "41103744",
+    "realizado": true,
+    "preparo": [
+      "Cabelo limpo e seco: sem gel, sem creme, sem óleo.",
+      "Não ingerir bebida alcoólica 24h antes do exame."
+    ],
+    "descricao": " - Exame que registra atividade elétrica cerebral espontânea, captada por eletrodos colocados no couro cabeludo. - Pode ser utilizado em todas as idades, de recém-nascidos a idosos. - Útil para: - Diagnóstico e acompanhamento de epilepsia. - Distúrbios da consciência. - Avaliação de sequelas neurológicas. - Monitoramento em UTIs e comatosos. - Avaliação de encefalopatias metabólicas, degenerativas e psiquiátricas.",
+    "descricao_execucao": [
+      "Colocação de eletrodos no couro cabeludo com pasta condutora.",
+      "O paciente deve permanecer imóvel e com olhos fechados.",
+      "O EEG registra a atividade elétrica espontânea durante vigília (acordado) e, se possível, durante o sono."
+    ],
+    "medicos_envolvidos": [],
+    "sinonimos": [
+      ": eeg vigil + sono (apenas com pedido médico)"
+    ],
+    "observacoes_adicionais": {
+      "instrucoes_gerais": " - Maca do EEG suporta até 180 kg. - Não realizamos: EEG com eletrodos especiais, EEG com foto estímulo (prova de ativação), HOLTER EEG, EEG com sedação e potencial evocado. - EEG prolongado acima de 1h → bloquear 1 horário a mais. Ex: 10h → bloquear 10h45. - EEG prolongado acima de 2h → bloquear 2 horários a mais. Ex: 10h → bloquear 10h45 e 11h30. - EEG prolongado em criança → somente a partir de 5 anos.",
+      "finalizacao_paciente": [
+        "Trazer pedido médico original.",
+        "Levar RG, CPF ou CNS, carteirinha do convênio/SUS (se tiver).",
+        "Não ingerir bebida alcoólica 24h antes do exame."
+      ],
+      "perguntas_agendamento": [
+        "Informar convênio.",
+        "Nome completo.",
+        "Data de nascimento, peso e altura.",
+        "Tem aplique ou tintura recente? (Pode interferir no exame)",
+        "Está indicado \"Foto estímulo\" na guia?"
+      ],
+      "orientacoes_crianca": ""
+    }
+  },
+  {
+    "modalidade": "EEG",
+    "exame": ": HOLTER EEG – NÃO FAZEMOS (somente na clínica do Dr. Moacir)",
+    "codigo": "41103751",
+    "realizado": false,
+    "preparo": [
+      "Cabelo limpo e seco: sem gel, sem creme, sem óleo.",
+      "Não ingerir bebida alcoólica 24h antes do exame."
+    ],
+    "descricao": " - Exame que registra atividade elétrica cerebral espontânea, captada por eletrodos colocados no couro cabeludo. - Pode ser utilizado em todas as idades, de recém-nascidos a idosos. - Útil para: - Diagnóstico e acompanhamento de epilepsia. - Distúrbios da consciência. - Avaliação de sequelas neurológicas. - Monitoramento em UTIs e comatosos. - Avaliação de encefalopatias metabólicas, degenerativas e psiquiátricas.",
+    "descricao_execucao": [
+      "Colocação de eletrodos no couro cabeludo com pasta condutora.",
+      "O paciente deve permanecer imóvel e com olhos fechados.",
+      "O EEG registra a atividade elétrica espontânea durante vigília (acordado) e, se possível, durante o sono."
+    ],
+    "medicos_envolvidos": [],
+    "sinonimos": [
+      ": holter eeg – não fazemos (somente na clínica do dr. moacir)"
+    ],
+    "observacoes_adicionais": {
+      "instrucoes_gerais": " - Maca do EEG suporta até 180 kg. - Não realizamos: EEG com eletrodos especiais, EEG com foto estímulo (prova de ativação), HOLTER EEG, EEG com sedação e potencial evocado. - EEG prolongado acima de 1h → bloquear 1 horário a mais. Ex: 10h → bloquear 10h45. - EEG prolongado acima de 2h → bloquear 2 horários a mais. Ex: 10h → bloquear 10h45 e 11h30. - EEG prolongado em criança → somente a partir de 5 anos.",
+      "finalizacao_paciente": [
+        "Trazer pedido médico original.",
+        "Levar RG, CPF ou CNS, carteirinha do convênio/SUS (se tiver).",
+        "Não ingerir bebida alcoólica 24h antes do exame."
+      ],
+      "perguntas_agendamento": [
+        "Informar convênio.",
+        "Nome completo.",
+        "Data de nascimento, peso e altura.",
+        "Tem aplique ou tintura recente? (Pode interferir no exame)",
+        "Está indicado \"Foto estímulo\" na guia?"
+      ],
+      "orientacoes_crianca": ""
+    }
+  }
+]

@@ -1,0 +1,123 @@
+[
+  {
+    "modalidade": "ENMG",
+    "exame": "Orientações gerais para exames de ENMG",
+    "codigo": "",
+    "preparo": [
+      "Chegar com 30 minutos de antecedência.",
+      "Trazer: pedido médico original, documento com foto, carteirinha do convênio/SUS (se houver) e exames anteriores (RX, USG, RM, TC)."
+    ],
+    "descricao": "Instruções básicas para todos os exames de eletroneuromiografia.",
+    "sinonimos": [
+      "orientações enmg",
+      "instruções enmg",
+      "documentos enmg",
+      "como se preparar para eletroneuromiografia"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Quem realiza o exame de ENMG",
+    "codigo": "",
+    "preparo": [
+      "Os exames de eletroneuromiografia são realizados pelo Dr. Jorge."
+    ],
+    "descricao": null,
+    "sinonimos": [
+      "quem faz enmg",
+      "quem realiza eletroneuromiografia",
+      "médico enmg",
+      "quem aplica o exame"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Quando agendar ENMG prolongado",
+    "codigo": "",
+    "preparo": [
+      "ENMG prolongado deve ser agendado com autorização prévia da equipe médica.",
+      "Esses exames exigem um tempo maior e avaliação do pedido médico antes da marcação."
+    ],
+    "descricao": "Agendamentos especiais para casos complexos de eletroneuromiografia.",
+    "sinonimos": [
+      "enmg prolongado",
+      "casos especiais enmg",
+      "enmg com duração maior",
+      "autorização enmg especial"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Pacientes que necessitam de sedação - ENMG",
+    "codigo": "",
+    "preparo": [
+      "Sedação não é oferecida rotineiramente para ENMG.",
+      "Pacientes que não colaboram (ex: crianças pequenas) devem ser avaliados individualmente.",
+      "Agendamento com sedação deve ser discutido previamente com o médico responsável."
+    ],
+    "descricao": null,
+    "sinonimos": [
+      "sedação enmg",
+      "criança sedada enmg",
+      "exame enmg com sedação",
+      "enmg sedado"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Materiais e medicações necessários para o ENMG",
+    "codigo": "",
+    "preparo": [
+      "Se for usar contraste ou anestesia local, o paciente deve trazer a medicação conforme orientação médica.",
+      "Confirmar com o médico se há necessidade de algum preparo específico em casa.",
+      "Trazer exames anteriores relacionados ao membro a ser examinado."
+    ],
+    "descricao": "Materiais que o paciente pode precisar levar no dia do exame.",
+    "sinonimos": [
+      "o que levar para enmg",
+      "medicamentos enmg",
+      "material necessário enmg",
+      "precisa levar remédio para enmg"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Exames não realizados na ENMG",
+    "codigo": "",
+    "preparo": [
+      "Não realizamos ENMG intraoperatória.",
+      "Não realizamos ENMG sob anestesia geral.",
+      "Não realizamos ENMG de nervos cranianos."
+    ],
+    "descricao": null,
+    "sinonimos": [
+      "enmg que não fazemos",
+      "exames enmg indisponíveis",
+      "o que não realizamos na eletroneuromiografia"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "ENMG",
+    "exame": "Orientações específicas para crianças - ENMG",
+    "codigo": "",
+    "preparo": [
+      "A criança deve estar acordada e alimentada.",
+      "Trazer brinquedo, chupeta ou algo que a acalme.",
+      "Se necessário, agendar consulta prévia com o Dr. Jorge para avaliar viabilidade sem sedação."
+    ],
+    "descricao": null,
+    "sinonimos": [
+      "enmg infantil",
+      "orientações para criança enmg",
+      "eletroneuromiografia criança",
+      "preparo infantil enmg"
+    ],
+    "medicos_envolvidos": []
+  }
+]
