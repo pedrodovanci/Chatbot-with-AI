@@ -1,0 +1,128 @@
+[
+  {
+    "modalidade": "RM",
+    "exame": "CRÂNIO",
+    "codigo": [
+      "4110001"
+    ],
+    "preparo": [
+      "Nenhum preparo necessário."
+    ],
+    "descricao": "Indicado para avaliação neurológica geral, crises convulsivas, cefaleia, trauma ou investigação de massa encefálica. Contraindicado para pacientes com histórico de desmaio, convulsão, AVC, epilepsia, entre outros. Pode ser feito em aparelhos 3.0T, 1.5T e, em casos específicos, em campo aberto 0.23T.",
+    "sinonimos": [
+      "rm crânio",
+      "ressonância do cérebro",
+      "ressonância craniana",
+      "exame de cabeça",
+      "ressonância do encéfalo"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "RM",
+    "exame": "SELA TÚRCICA",
+    "codigo": [
+      "4110002"
+    ],
+    "preparo": [
+      "Jejum de 4 horas."
+    ],
+    "descricao": "Realizado sempre com contraste. Avaliação da hipófise e investigação de alterações hormonais como hiperprolactinemia e acromegalia.",
+    "sinonimos": [
+      "rm sela túrcica",
+      "rm hipófise",
+      "exame da hipófise",
+      "ressonância pituitária"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "RM",
+    "exame": "FACE / SEIOS DA FACE",
+    "codigo": [
+      "4110003"
+    ],
+    "preparo": [
+      "2 horas de jejum."
+    ],
+    "descricao": "Avaliação de sinusite, pólipos nasais, rinite, desvio de septo. Sem contraste, exceto se solicitado pelo médico.",
+    "sinonimos": [
+      "rm seios da face",
+      "rm face",
+      "ressonância dos seios da face",
+      "ressonância facial"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "RM",
+    "exame": "ORELHA INTERNA",
+    "codigo": [
+      "4110004"
+    ],
+    "preparo": [
+      "2 horas de jejum."
+    ],
+    "descricao": "Investigação de zumbido, vertigem e perda auditiva. Pode usar contraste em casos como schwannoma.",
+    "sinonimos": [
+      "rm orelha interna",
+      "rm ouvido",
+      "ressonância auditiva",
+      "ressonância labirinto"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "RM",
+    "exame": "ÓRBITAS",
+    "codigo": [
+      "4110005"
+    ],
+    "preparo": [
+      "Jejum de 4 horas."
+    ],
+    "descricao": "Geralmente com contraste. Indicado para avaliação de tumores orbitais, inflamações, nervo óptico e diplopia.",
+    "sinonimos": [
+      "rm órbitas",
+      "rm olhos",
+      "ressonância ocular",
+      "ressonância das órbitas"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "RM",
+    "exame": "HIPÓFISE (SELA TÚRCICA)",
+    "codigo": [
+      "41101073"
+    ],
+    "preparo": [
+      "Jejum de 4 horas."
+    ],
+    "descricao": "Realizado sempre com contraste. Avaliação detalhada da hipófise e investigação de adenomas hipofisários.",
+    "sinonimos": [
+      "rm hipófise",
+      "rm pituitária",
+      "ressonância da hipófise",
+      "hipófise sela túrcica"
+    ],
+    "medicos_envolvidos": []
+  },
+  {
+    "modalidade": "RM",
+    "exame": "HIPÓFISE (VARIAÇÃO TÉCNICA OU COBERTURA)",
+    "codigo": [
+      "41101308"
+    ],
+    "preparo": [
+      "Jejum de 4 horas."
+    ],
+    "descricao": "Mesma indicação da RM de hipófise, mas com técnica ou cobertura diferenciada conforme convênio.",
+    "sinonimos": [
+      "rm hipófise técnica especial",
+      "hipófise variação cobertura",
+      "sela túrcica variação técnica"
+    ],
+    "medicos_envolvidos": []
+  }
+]

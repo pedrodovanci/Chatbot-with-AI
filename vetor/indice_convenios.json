@@ -1,0 +1,536 @@
+{
+  "amafresp": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "amil/golden cross": {
+    "modalidades": [
+      "ANGIO-TC",
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RM DE FACE",
+      "RM DE MAMA",
+      "RM DE MASTOIDE",
+      "RM DE ÓRBITA",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "assomim": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "apas andradina": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "apas aracatuba": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "apas barretos": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "apas fernandopolis": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "aresp": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "assefaz": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "austa ocupacional": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "bradesco": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "cabesp": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "cassi": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "cemerp - probem": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "clinica bady": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "clinica dr para todos": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "convida": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "ocupacional dr americo": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "economus": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "frutal licitação": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "hapvida": {
+    "modalidades": [
+      "ANGIO-RM",
+      "ANGIO-TC",
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "hb": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "iamspe": {
+    "modalidades": [
+      "ANGIO-TC",
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC (EXCETO ANGIO-TC)",
+      "US"
+    ]
+  },
+  "jj medicina trabalho": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "life empresarial": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "mednorte": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "medmais": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "mutuarias": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "metra": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "mediservice": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "omint": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "padre albino": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "partmed": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "prefeituras": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "postal saude": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "proasa": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "prever convenio": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "prever": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "pronto saude": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "polimed": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "rede mil": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "são domingos": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "sansaude": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "sabesprev/vivest": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "sompo saude": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "sulamerica": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "unifamilia": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  },
+  "unimed": {
+    "modalidades": [
+      "EEG",
+      "ENMG",
+      "POLISSONOGRAFIA",
+      "RM",
+      "RX",
+      "TC",
+      "US"
+    ]
+  }
+}

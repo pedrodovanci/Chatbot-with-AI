@@ -19,8 +19,7 @@
       "ressonância magnética encéfalo",
       "crânio (encéfalo)",
       "ressonância crânio"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -40,8 +39,7 @@
       "rm túrcica hipófise",
       "sela túrcica (hipófise)",
       "ressonância sela"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -60,8 +58,7 @@
       "rm do crânio",
       "base do crânio",
       "ressonância base"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -76,8 +73,7 @@
       "ressonância magnética funcional mapeamento cortical por rm",
       "rm funcional mapeamento cortical por rm",
       "ressonância estudo"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -97,10 +93,6 @@
       "rm cerebral por rm",
       "ressonância perfusão",
       "ressonância magnética cerebral por rm"
-    ],
-    "medicos_envolvidos": [
-      "Dra. Ju",
-      "Dr. Tony"
     ]
   },
   {
@@ -122,10 +114,6 @@
       "ressonância magnética por rm",
       "ressonância espectroscopia",
       "espectroscopia por rm"
-    ],
-    "medicos_envolvidos": [
-      "Dra. Ju",
-      "Dr. Tony"
     ]
   },
   {
@@ -143,8 +131,7 @@
       "rm bilaterais",
       "ressonância magnética bilaterais",
       "órbitas bilaterais"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -164,8 +151,7 @@
       "rm seios da face",
       "face / seios da face",
       "ressonância face"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -185,8 +171,7 @@
       "ouvido / ossos temporais / mastoide",
       "rm ossos temporais mastoide",
       "ressonância ouvido"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -205,8 +190,7 @@
     "sinonimos": [
       "rm cervical",
       "ressonância cervical"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -225,8 +209,7 @@
     "sinonimos": [
       "rm torácica",
       "ressonância torácica"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -245,8 +228,7 @@
     "sinonimos": [
       "rm lombar",
       "ressonância lombar"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -265,9 +247,6 @@
       "ressonância magnética arcos costais mediastino pulmão",
       "rm arcos costais mediastino pulmão",
       "tórax / arcos costais / mediastino / pulmão"
-    ],
-    "medicos_envolvidos": [
-      "Dr. Guilherme"
     ]
   },
   {
@@ -287,8 +266,7 @@
       "pescoço (nasofaringe / orofaringe / tireoide)",
       "rm nasofaringe orofaringe tireoide",
       "ressonância magnética nasofaringe orofaringe tireoide"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -304,17 +282,11 @@
     ],
     "descricao": null,
     "sinonimos": [
-      "rm abdome",
-      "ressonância do abdome",
-      "abdome ressonância",
-      "ressonância abdome superior",
-      "rm abdome superior",
-      "ressonância de abdome",
-      "rm abdome total",
-      "rm de abdome",
-      "ressonância do abdome superior"
-    ],
-    "medicos_envolvidos": []
+      "rm superior",
+      "abdome superior",
+      "ressonância abdome",
+      "ressonância magnética superior"
+    ]
   },
   {
     "modalidade": "RM",
@@ -335,8 +307,7 @@
       "rm pelve",
       "ressonância pélvica",
       "rm pélvica"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -357,8 +328,7 @@
       "rm próstata",
       "ressonância da próstata",
       "rm de próstata"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -378,8 +348,7 @@
     "sinonimos": [
       "rm endometriose",
       "ressonância para endometriose"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -401,8 +370,7 @@
       "ressonância da placenta",
       "rm da placenta",
       "ressonância magnética placentária"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -424,9 +392,6 @@
       "ressonância penis",
       "ressonância magnética ",
       "penis"
-    ],
-    "medicos_envolvidos": [
-      "Dr. Guilherme"
     ]
   },
   {
@@ -445,9 +410,6 @@
       "bolsa escrotal",
       "rm escrotal",
       "ressonância bolsa"
-    ],
-    "medicos_envolvidos": [
-      "Dr. Guilherme"
     ]
   },
   {
@@ -470,8 +432,7 @@
       "ressonância magnética ombro joelho quadril etc.",
       "ressonância articular",
       "articular (ombro, joelho, quadril etc.)"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -490,9 +451,6 @@
     "sinonimos": [
       "hidro rm",
       "hidrografia por ressonância"
-    ],
-    "medicos_envolvidos": [
-      "Dr. Guilherme"
     ]
   },
   {
@@ -512,9 +470,6 @@
     "sinonimos": [
       "colangio rm",
       "colangiografia por rm"
-    ],
-    "medicos_envolvidos": [
-      "Dr. Guilherme"
     ]
   },
   {
@@ -534,9 +489,6 @@
     "sinonimos": [
       "uro rm",
       "urografia por rm"
-    ],
-    "medicos_envolvidos": [
-      "Dr. Guilherme"
     ]
   },
   {
@@ -555,8 +507,7 @@
       "mão",
       "ressonância mão",
       "ressonância magnética "
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -575,8 +526,7 @@
       "coxa",
       "ressonância magnética ",
       "ressonância coxa"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -593,8 +543,7 @@
       "hipófise (variação técnica)",
       "rm variação técnica",
       "ressonância hipófise"
-    ],
-    "medicos_envolvidos": []
+    ]
   },
   {
     "modalidade": "RM",
@@ -613,7 +562,6 @@
       "mama (bilateral)",
       "rm bilateral",
       "ressonância magnética bilateral"
-    ],
-    "medicos_envolvidos": []
+    ]
   }
 ]

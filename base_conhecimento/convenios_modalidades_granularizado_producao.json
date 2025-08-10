@@ -74,7 +74,7 @@
   {
     "modalidade": "POLISSONOGRAFIA",
     "convenio": "amafresp",
-    "cobre": true,
+    "cobre": false,
     "excecoes": [],
     "observacoes": [
       "precisa de foto do pedido e cartão. Autoriza em 3 dias."
@@ -4761,5 +4761,49 @@
       "psg",
       "polissonografia"
     ]
+  },
+  [
+  {
+    "convenio": "Unimed",
+    "modalidade": "RM",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
+  },
+  {
+    "convenio": "Unimed",
+    "modalidade": "TC",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
+  },
+  {
+    "convenio": "Unimed",
+    "modalidade": "EEG",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
+  },
+  {
+    "convenio": "Unimed",
+    "modalidade": "ENMG",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
+  },
+  {
+    "convenio": "Unimed",
+    "modalidade": "RX",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
+  },
+  {
+    "convenio": "Unimed",
+    "modalidade": "US",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
+  },
+  {
+    "convenio": "Unimed",
+    "modalidade": "Polissonografia",
+    "observacao": "Unimed com carteirinha 0030 não cobre US.",
+    "autorizacao": "Paciente traz pedido autorizado."
   }
+]
 ]
