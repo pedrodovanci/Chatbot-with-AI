@@ -1,181 +1,20 @@
+# perguntar_ia.py — 100% Google (Vertex AI Search + Gemini via Vertex AI)
 import os
-import json
+import re as _re
 import re
+from typing import List, Dict, Any, Optional
+from typing import Any
 from dotenv import load_dotenv
-from langchain_community.vectorstores import FAISS
-from gemini_client import ask_gemini
-from typing import Dict, Any, List, Optional
+from google.cloud import discoveryengine_v1 as discoveryengine
+from vertexai import init as vertexai_init
+from vertexai.generative_models import GenerativeModel # gemini no Vertex AI
+import google.cloud.aiplatform as aiplatform
+print("DEBUG aiplatform:", aiplatform.__version__)
 
-# ========= Regras determinísticas: funções utilitárias =========
 
-def parse_question(q: str) -> Dict[str, Any]:
-    """Extrai apenas o que precisamos para a decisão: peso, contraste e convênio citado."""
-    ql = q.lower()
-
-    # peso em kg (ex.: "110 kg")
-    peso = None
-    m = re.search(r'(\d{2,3})\s*kg\b', ql)
-    if m:
-        try:
-            peso = int(m.group(1))
-        except Exception:
-            peso = None
-
-    # contraste
-    contraste = bool(re.search(r'\b(contraste|contrastado)\b', ql))
-
-    # convênio (usa o seu dicionário CONVENIOS)
-    convenio_hint = None
-    for k, v in CONVENIOS.items():
-        if k in ql:
-            convenio_hint = v.lower()
-            break
-
-    # modalidade: para este motor, focamos em TC
-    modalidade = "tc" if re.search(r'\b(tc|tomografia|angio[- ]?tc)\b', ql) else None
-
-    return {"peso": peso, "contraste": contraste, "convenio_hint": convenio_hint, "modalidade": modalidade}
-
-def _extract_field(text: str, rotulo: str) -> str:
-    # aceita "Exceções" e "Excecoes", etc.
-    alt = rotulo
-    if rotulo.lower() == "exceções":
-        alt = "Exce(c|ç)oe?s"
-    pattern = alt if "(" in alt else re.escape(rotulo)
-    m = re.search(rf"{pattern}\s*:\s*(.*)", text, flags=re.IGNORECASE)
-    return m.group(1).strip() if m else ""
-
-def pick_convenio_tc(docs_convenio: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
-    """
-    Recebe uma lista de dicts {"metadata": ..., "content": ...}
-    Retorna info do convênio especificamente para modalidade TC, se houver.
-    """
-    for d in docs_convenio:
-        meta = d.get("metadata") or {}
-        if meta.get("modalidade", "").lower() == "tc":
-            content = d.get("content", "") or ""
-            return {
-                "convenio": (meta.get("convenio") or "").lower(),
-                "cobertura": _extract_field(content, "Cobertura"),
-                "excecoes": _extract_field(content, "Exceções"),
-                "observacoes": _extract_field(content, "Observações")
-            }
-    return None
-
-def parse_regras_tc(docs_regras: List[Dict[str, Any]]) -> Dict[str, Any]:
-    """
-    Varre conteúdos de regras técnicas (modalidade 'tc') procurando limites de peso.
-    Heurística: linhas contendo 'peso' ou 'mesa' + 'kg'. Diferencia se mencionar 'contraste'.
-    """
-    peso_max = None
-    peso_max_contraste = None
-    preparo_itens = []
-
-    for d in docs_regras:
-        txt = (d.get("content") or "").splitlines()
-        for line in txt:
-            low = line.lower()
-            m = re.search(r'(peso|mesa).*?(\d{2,3})\s*kg', low)
-            if m:
-                try:
-                    val = int(m.group(2))
-                except Exception:
-                    val = None
-                if val:
-                    if "contraste" in low:
-                        peso_max_contraste = max(peso_max_contraste or 0, val)
-                    else:
-                        peso_max = max(peso_max or 0, val)
-            if "preparo" in low or "orienta" in low or "jejum" in low:
-                preparo_itens.append(line.strip())
-
-    return {"peso_max": peso_max, "peso_max_contraste": peso_max_contraste, "preparo": preparo_itens}
-
-def decide_agendamento(ent: Dict[str, Any], conv_info: Optional[Dict[str, Any]], regras: Dict[str, Any]) -> Dict[str, Any]:
-    """
-    Motor de decisão:
-    - Cobertura NÃO -> negado_convênio
-    - Cobertura INDEFINIDO -> pendente_autorização (nunca aprova)
-    - Cobertura SIM -> checa regra técnica (peso). Se exceder -> negado_técnico; senão -> aprovado
-    """
-    if not conv_info:
-        return {"status": "faltam_dados", "motivo": "Não encontrei regra do convênio para TC."}
-
-    cobertura_raw = (conv_info.get("cobertura") or "").strip().lower()
-    if "sim" in cobertura_raw:
-        cobertura = "SIM"
-    elif ("não" in cobertura_raw) or ("nao" in cobertura_raw):
-        cobertura = "NÃO"
-    else:
-        cobertura = "INDEFINIDO"
-
-    if cobertura == "NÃO":
-        return {"status": "negado_convênio", "cobertura": cobertura, "convenio": conv_info.get("convenio")}
-
-    # Checagem técnica (peso)
-    peso = ent.get("peso")
-    usar_contraste = ent.get("contraste", False)
-    limite = None
-    if usar_contraste and (regras.get("peso_max_contraste") is not None):
-        limite = regras["peso_max_contraste"]
-    else:
-        limite = regras.get("peso_max")
-
-    if (peso is not None) and (limite is not None) and (peso > limite):
-        return {"status": "negado_técnico", "cobertura": cobertura, "limite_peso": limite, "peso_paciente": peso}
-
-    sem_regra_peso = (peso is not None) and (limite is None)
-
-    if cobertura == "INDEFINIDO":
-        return {"status": "pendente_autorização", "cobertura": cobertura, "sem_regra_peso": sem_regra_peso}
-
-    # cobertura == SIM
-    pend_aut = "autoriz" in (conv_info.get("observacoes", "").lower())
-    return {
-        "status": "aprovado",
-        "cobertura": cobertura,
-        "pendente_autorizacao": pend_aut,
-        "sem_regra_peso": sem_regra_peso
-    }
-
-def formatar_veredito(ver: Dict[str, Any], ent: Dict[str, Any], conv_info: Optional[Dict[str, Any]], regras: Dict[str, Any]) -> str:
-    """Gera mensagem final coerente com a política de decisão acima."""
-    if ver["status"] == "negado_convênio":
-        return ("Resposta: Não é possível agendar pelo convênio (cobertura: NÃO). "
-                "Alternativas: particular ou confirmar a política com o convênio.")
-
-    if ver["status"] == "negado_técnico":
-        return (f"Resposta: Não é possível realizar TC por limite técnico do equipamento: "
-                f"peso do paciente {ver['peso_paciente']} kg > limite {ver['limite_peso']} kg.")
-
-    if ver["status"] == "pendente_autorização":
-        base = "Resposta: Cobertura INDEFINIDA — necessário confirmar com o convênio antes de agendar"
-        if ver.get("sem_regra_peso"):
-            base += "; não encontrei regra de peso nos documentos."
-        return base + "."
-
-    if ver["status"] == "aprovado":
-        msg = "Resposta: Pode agendar TC pelo convênio."
-        if ver.get("pendente_autorizacao"):
-            msg += " Observação: exige autorização prévia."
-        if ver.get("sem_regra_peso"):
-            msg += " Observação: não encontrei regra de peso nos documentos."
-        return msg
-
-    # faltam_dados
-    return "Resposta: Não encontrei dados suficientes para decidir. Recomendo confirmar com o setor responsável."
-
-# Carregar .env antes de ler variáveis
-load_dotenv()
-
-# ===================== CONFIG =====================
-PASTA_VETOR = "vetor/faiss_index"
-ARQ_INDICE_CONVENIOS = "vetor/indice_convenios.json"
-DEBUG = os.getenv("SHOW_DEBUG", "1") == "1"     # ligue/desligue prints de debug por ENV
-TOP_K_BASE = int(os.getenv("TOP_K_BASE", "12")) # tuning fino do recall
-# ==================================================
-
-# ------------------- Utils limpeza ----------------
+# =========================
+# Util: limpar resposta
+# =========================
 def limpar_resposta_ia(resposta: str) -> str:
     if not resposta:
         return "Resposta: Não encontrei essa informação com clareza no documento. Recomendo confirmar com o setor responsável."
@@ -185,8 +24,7 @@ def limpar_resposta_ia(resposta: str) -> str:
     else:
         corpo = resposta.strip()[9:].strip()
         resposta = "Resposta: " + corpo
-    linhas = [ln.strip() for ln in resposta.splitlines()]
-    linhas = [ln for ln in linhas if ln]
+    linhas = [ln.strip() for ln in resposta.splitlines() if ln.strip()]
     linhas = [ln for ln in linhas if not re.fullmatch(r"(?i)resposta:\s*código:\s*$", ln)
                                and not re.fullmatch(r"(?i)código:\s*$", ln)]
     resposta = "\n".join(linhas).strip()
@@ -194,24 +32,209 @@ def limpar_resposta_ia(resposta: str) -> str:
         return "Resposta: Não encontrei essa informação com clareza no documento. Recomendo confirmar com o setor responsável."
     return resposta
 
-# ----------------- Carregamentos base --------------
+# =========================
+# Estrutura simples de doc
+# =========================
+class _Doc:
+    def __init__(self, page_content: str, metadata: Dict[str, Any]):
+        self.page_content = page_content
+        self.metadata = metadata
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+# =========================
+# ENV / Config
+# =========================
+load_dotenv(override=True)
 
-embeddings = OpenAIEmbeddings()
-db = FAISS.load_local(PASTA_VETOR, embeddings, allow_dangerous_deserialization=True)
+PROJECT_ID = os.getenv("PROJECT_ID")
+SEARCH_LOCATION = os.getenv("SEARCH_LOCATION", "global")
+SERVING_CONFIG = os.getenv("SERVING_CONFIG")  # precisa conter /engines/
+VERTEX_LOCATION = os.getenv("VERTEX_LOCATION", "us-central1")
 
-# índice raso de convênios (opcional, para pré-filtro)
-INDICE_CONVENIOS = {}
-try:
-    with open(ARQ_INDICE_CONVENIOS, "r", encoding="utf-8") as f:
-        INDICE_CONVENIOS = json.load(f) or {}
-except Exception:
-    INDICE_CONVENIOS = {}
+print(f"DEBUG PROJECT_ID: {PROJECT_ID}")
+print(f"DEBUG SEARCH_LOCATION: {SEARCH_LOCATION}")
+print(f"DEBUG SERVING_CONFIG: {SERVING_CONFIG}")
+print(f"DEBUG VERTEX_LOCATION: {VERTEX_LOCATION}")
 
-# ----------------- Normalizações -------------------
+if not PROJECT_ID or not SEARCH_LOCATION or not SERVING_CONFIG:
+    raise RuntimeError("Configure PROJECT_ID, SEARCH_LOCATION e SERVING_CONFIG no .env.")
+if "/engines/" not in SERVING_CONFIG:
+    raise RuntimeError("SERVING_CONFIG precisa conter '/engines/' (engine do Vertex AI Search).")
+
+# inicializa Vertex AI (Gemini)
+vertexai_init(project=PROJECT_ID, location=VERTEX_LOCATION)
+GEMINI_MODEL = GenerativeModel("gemini-2.5-flash-lite")
+# se ainda vier 404, teste: GenerativeModel("gemini-1.0-pro-001")
+
+
+# =========================
+# Busca — Vertex AI Search
+# =========================
+def _as_text(v) -> str:
+    try:
+        if v is None:
+            return ""
+        if isinstance(v, (list, tuple)):
+            return " ".join(_as_text(x) for x in v if x is not None)
+        if isinstance(v, dict):
+            return " ".join(_as_text(x) for x in v.values() if x is not None)
+        s = str(v)
+        return s if s != "None" else ""
+    except Exception:
+        return ""
+
+def _safe(v):
+    try:
+        if v is None:
+            return ""
+        if isinstance(v, (list, tuple)):
+            return " ".join(_safe(x) for x in v)
+        if isinstance(v, dict):
+            return " ".join(_safe(x) for x in v.values())
+        s = str(v)
+        # filtra impressões de objetos proto do Discovery Engine
+        return "" if s.startswith("<proto.") or "MapComposite" in s else s
+    except Exception:
+        return ""
+
+def vertex_search(query: str, top_k: int = 10, filtro: Optional[Dict[str, str]] = None) -> List[_Doc]:
+    client = discoveryengine.SearchServiceClient()
+    
+    filtro_str = ""
+    if filtro:
+        parts = [f'{k}="{v}"' for k, v in filtro.items() if v]
+        filtro_str = " AND ".join(parts)
+
+    content_spec = discoveryengine.SearchRequest.ContentSearchSpec(
+        snippet_spec=discoveryengine.SearchRequest.ContentSearchSpec.SnippetSpec(
+            return_snippet=True
+        ),
+        extractive_content_spec=discoveryengine.SearchRequest.ContentSearchSpec.ExtractiveContentSpec(
+            max_extractive_answer_count=3,
+            max_extractive_segment_count=3,
+            return_extractive_segment_score=True
+        ),
+        summary_spec=discoveryengine.SearchRequest.ContentSearchSpec.SummarySpec(
+            summary_result_count=1,
+            include_citations=False
+        )
+    )
+
+    req = discoveryengine.SearchRequest(
+        serving_config=SERVING_CONFIG,
+        query=query,
+        page_size=min(max(12, top_k), 100),
+        filter=filtro_str,                # usa o filtro montado
+        content_search_spec=content_spec  # habilita snippet/trechos/resumo
+    )
+
+    resp = client.search(request=req, timeout=15)
+
+    # opcional: colocar o summary como 1º doc se vier
+    sumtxt = ""
+    try:
+        if getattr(resp, "summary", None) and getattr(resp.summary, "summary_text", ""):
+            sumtxt = resp.summary.summary_text.strip()
+    except Exception:
+        pass
+
+    results: List[_Doc] = []
+    if sumtxt:
+        results.append(_Doc(sumtxt, {"origem": "Vertex Search (summary)"}))
+    for i, r in enumerate(resp):
+        if i >= top_k:
+            break
+        # — dentro do loop for i, r in enumerate(resp): —
+        doc = r.document
+
+        def _flatten_text(x):
+            out = []
+            if x is None:
+                return out
+            if isinstance(x, str):
+                # ignora lixos proto
+                if x.startswith("<proto.") or "MapComposite" in x:
+                    return out
+                out.append(x)
+                return out
+            if isinstance(x, (list, tuple)):
+                for it in x:
+                    out.extend(_flatten_text(it))
+                return out
+            if isinstance(x, dict):
+                # priorize campos comuns primeiro
+                prefer = ("content","text","body","answer","snippet","segment","html","description","title")
+                for k in prefer:
+                    if k in x: out.extend(_flatten_text(x.get(k)))
+                # pegue o resto das chaves também
+                for k, v in x.items():
+                    if k not in prefer:
+                        out.extend(_flatten_text(v))
+                return out
+            return out
+
+        candidates = []
+
+        # 1) snippet do resultado (quando tem)
+        snip = getattr(r, "snippet", None)
+        if snip:
+            candidates.append(str(snip))
+
+        # 2) derived_struct_data completo (muitas vezes ficam aqui as respostas/segmentos)
+        if doc and getattr(doc, "derived_struct_data", None):
+            candidates.extend(_flatten_text(doc.derived_struct_data))
+
+        # 3) struct_data (content/text/body/html/etc.)
+        if doc and getattr(doc, "struct_data", None):
+            candidates.extend(_flatten_text(doc.struct_data))
+
+        # normaliza/filtra
+        candidates = [c.strip() for c in candidates if c and isinstance(c, str) and c.strip()]
+        # escolha o melhor trecho (maior costuma ser mais completo)
+        text = max(candidates, key=len, default="")
+        if len(text) > 6000:
+            text = text[:6000]
+
+        md = {"origem": ""}
+        if not md.get("origem"):
+            md["origem"] = getattr(doc, "name", "") or "desconhecida"
+
+        if doc and getattr(doc, "struct_data", None):
+            sd = doc.struct_data
+            for key in ("tipo", "modalidade", "convenio"):
+                val = sd.get(key)
+                if val:
+                    md[key] = str(val).lower()
+            for k in ("uri", "url", "link", "source", "gcs_path", "file", "path", "origem"):
+                val = sd.get(k)
+                if val and not md.get("origem"):
+                    md["origem"] = str(val)
+        print("---- DEBUG RESULT ----")
+        print("SNIPPET:", _safe(getattr(r, "snippet", ""))[:300])
+        if doc and getattr(doc, "derived_struct_data", None):
+            ds = doc.derived_struct_data
+            print("EXTRACTIVE_ANSWERS:", _safe(ds.get("extractive_answers"))[:300])
+            print("EXTRACTIVE_SEGMENTS:", _safe(ds.get("extractive_segments"))[:300])
+        if doc and getattr(doc, "struct_data", None):
+            sd = doc.struct_data
+            print("STRUCT content/text/body:", _safe(sd.get("content"))[:300], _safe(sd.get("text"))[:300], _safe(sd.get("body"))[:300])
+        print("----------------------")
+        results.append(_Doc(text or "", md))
+
+    print(f"[DEBUG] vertex_search: retornou {len(results)} doc(s)")
+    return results
+
+# =========================
+# Filtros de contexto
+# =========================
+CONVENIO_KEYWORDS = {
+    "convênio","convenio","plano","cobertura","cobre","aceita","autorização","autorizacao",
+    "guia","pedido autorizado","carteirinha","autorizado","autoriza"
+}
+
 CONVENIOS = {
+    # existentes
     "unimed":"unimed","geap":"geap","austa":"austa","bradesco":"bradesco","notredame":"notredame","prevent":"prevent",
+    # principais do seu arquivo
     "amafresp":"amafresp","amil":"amil/golden cross","golden cross":"amil/golden cross","assomim":"assomim",
     "apas andradina":"apas andradina","apas aracatuba":"apas aracatuba","apas araçatuba":"apas aracatuba",
     "apas barretos":"apas barretos","apas fernandopolis":"apas fernandopolis","fernandópolis":"apas fernandopolis",
@@ -248,150 +271,115 @@ MODS_MAP = {
 }
 MOD_LOOKUP = {alias: canon for canon, aliases in MODS_MAP.items() for alias in aliases}
 
-CONVENIO_KEYWORDS = {
-    "convênio","convenio","plano","cobertura","cobre","aceita","autorização","autorizacao",
-    "guia","pedido autorizado","carteirinha","autorizado","autoriza"
-}
-
-# --------------- Extração de entidades ---------------
-def extract_entities(pergunta: str):
-    t = pergunta.lower()
-    conv = None
-    for k, v in CONVENIOS.items():
-        if k in t:
-            conv = v.lower()
-            break
-
-    mod = None
-    for alias, canon in MOD_LOOKUP.items():
-        if alias in t:
-            mod = canon.lower()
-            break
-
-    # região / exame-alvo (tokens livres comuns)
-    # exemplo: "abdome superior", "encéfalo", "joelho", etc.
-    alvo_tokens = []
-    # pegue grupos simples de 2-3 palavras após "rm", "tc", "ultrassom", etc.
-    alvo_match = re.search(r"(rm|tc|ultra?ssom|raio-?x|eeg|enmg)\s*(de)?\s*([a-zçãâáéíóúõ ]{3,})", t)
-    if alvo_match:
-        alvo_tokens = alvo_match.group(3).strip().split()
-
-    # sinais auxiliares
-    contrast = ("contraste" in t) or ("sem contraste" in t) or ("com contraste" in t)
-    machine_tesla = "3.0t" if "3.0t" in t or "3t" in t else ("1.5t" if "1.5t" in t or "1,5t" in t else None)
-    horario = None
-    hhmm = re.search(r"\b([01]?\d|2[0-3])[:h.]?([0-5]\d)\b", t)
-    if hhmm:
-        horario = f"{hhmm.group(1).zfill(2)}:{hhmm.group(2)}"
-    idade = None
-    idade_m = re.search(r"\b(\d{1,2})\s*anos?\b", t)
-    if idade_m:
-        try: idade = int(idade_m.group(1))
-        except: idade = None
-
-    return {
-        "convenio": conv,
-        "modalidade": mod,
-        "alvo_tokens": alvo_tokens,
-        "contrast_flag": contrast,
-        "machine_tesla": machine_tesla,
-        "horario": horario,
-        "idade": idade,
-        "pediatrico": any(p in t for p in {"criança","crianca","bebê","bebe","menor","filho","filha","agitado","pediatria"})
-    }
-
-# ----------- Busca + Pré-filtro de contexto -----------
 def eh_pergunta_convenio(texto: str) -> bool:
     t = texto.lower()
     if any(k in t for k in CONVENIO_KEYWORDS):
         return True
-    modalidades = {"rm","ressonância","ressonancia","tc","tomografia","eeg","enmg","rx","raio-x","ultrassom","us","polissonografia",
-                   "angio rm","angio-rm","angio tc","angio-tc","rm de mama","rm de mastoide","rm de face","rm de órbita","rm de orbita"}
+    modalidades = set(sum(MODS_MAP.values(), []))
     return any(m in t for m in modalidades)
 
-def buscar_contexto_base(pergunta: str, k: int):
+# --- normalização e expansão automática da consulta ---
+_ACENTOS = str.maketrans("áàâãéêíóôõúçÁÀÂÃÉÊÍÓÔÕÚÇ", "aaaaeeioooucAAAAEEIOOOUC")
+
+SINONIMOS = {
+    "codigo": ["código", "codigo", "cod", "cód", "tuss", "procedimento"],
+    "cranio": ["crânio", "cranio", "encéfalo", "encefalo", "encefálico", "encefalico"],
+    "ressonancia": ["ressonância", "ressonancia", "rm", "ressonancia magnetica", "ressonância magnética"],
+    "tomografia": ["tc", "tomografia", "tomografia computadorizada"],
+    "orbita": ["órbita", "orbita", "orbitário", "orbitario"],
+    # adicione outros termos da sua base aqui
+}
+
+def _norm(s: str) -> str:
+    return (s or "").lower().translate(_ACENTOS)
+
+def _grupo_or(palavras):
+    uniq = []
+    vistos = set()
+    for p in palavras:
+        k = _norm(p)
+        if k not in vistos:
+            vistos.add(k); uniq.append(p)
+    if len(uniq) == 1:
+        return uniq[0]
+    return "(" + " OR ".join(uniq) + ")"
+
+def expandir_consulta(q: str) -> str:
+    qn = _norm(q)
+    tokens = qn.split()
+    grupos = []
+    for tk in tokens:
+        base = None
+        # mapeia token para chave de sinônimos
+        for chave, lista in SINONIMOS.items():
+            if tk in [_norm(x) for x in lista] or tk == chave:
+                base = chave
+                break
+        if base:
+            grupos.append(_grupo_or(SINONIMOS[base]))
+        else:
+            grupos.append(tk)
+    # reforça alguns termos úteis (boost leve)
+    reforcos = []
+    if any(_norm(x) in tokens for x in ["rm","ressonancia","ressonância"]):
+        reforcos.append(_grupo_or(SINONIMOS["ressonancia"]))
+    if any(_norm(x) in tokens for x in ["crânio","cranio","encéfalo","encefalo"]):
+        reforcos.append(_grupo_or(SINONIMOS["cranio"]))
+    if any(_norm(x) in tokens for x in ["código","codigo","tuss","procedimento","cod"]):
+        reforcos.append(_grupo_or(SINONIMOS["codigo"]))
+    consulta = " ".join(grupos + reforcos)
+    return consulta.strip()
+
+def buscar_contexto(pergunta: str, k: int = 12) -> List[_Doc]:
+    base = expandir_consulta(pergunta)
+     # se for pergunta de convênio, aumenta o recall
     if eh_pergunta_convenio(pergunta):
-        return db.similarity_search(pergunta, k=k, filter={"tipo": "convenio"})
-    return db.similarity_search(pergunta, k=k)
-
-def conv_cobre_modalidade(conv_norm: str, modalidade_up: str) -> bool | None:
-    """Consulta rápida no índice raso; retorna True/False/None (desconhecido)."""
-    if not INDICE_CONVENIOS or not conv_norm or not modalidade_up:
-        return None
-    bloco = INDICE_CONVENIOS.get(conv_norm, {})
-    mods = set((bloco.get("modalidades") or []))
-    if not mods:
-        return None
-    return modalidade_up in mods
-
-def prefiltrar_documentos(docs, ent):
-    """Mantém só o que tem alta chance de relevância à pergunta."""
-    if not docs:
+        docs = vertex_search(base, top_k=max(k, 25))
+        if docs:
+            return docs
+    # tentativa 1: consulta expandida
+    docs = vertex_search(base, top_k=k)
+    if docs:
         return docs
-    conv = ent["convenio"]
-    mod = (ent["modalidade"] or "").lower()
-    alvo = [a for a in ent["alvo_tokens"] if len(a) > 2]
 
-    filtrados = []
+    # tentativa 2: heurística — se falar em código, força termos usuais
+    qn = _norm(pergunta)
+    extras = []
+    if any(w in qn for w in ["codigo","código","cod","tuss","procedimento"]):
+        extras.append(_grupo_or(SINONIMOS["codigo"]))
+    if any(w in qn for w in ["rm","ressonancia","ressonância"]):
+        extras.append(_grupo_or(SINONIMOS["ressonancia"]))
+    if any(w in qn for w in ["cranio","crânio","encéfalo","encefalo"]):
+        extras.append(_grupo_or(SINONIMOS["cranio"]))
+
+    if extras:
+        docs = vertex_search(base + " " + " ".join(extras), top_k=max(k, 16))
+        if docs:
+            return docs
+
+    # tentativa 3: consulta crua (como o usuário digitou) com top_k maior
+    docs = vertex_search(pergunta, top_k=max(k, 20))
+    return docs or []
+    
+
+def resumo_convenio(conv: str) -> str:
+    def _txt(s): return (s or "").lower()
+    conv_norm = _txt(conv).strip()
+
+    docs = vertex_search(f'{conv_norm} convenio cobertura', top_k=200)
+
+    cobertura: Dict[str, bool] = {}
     for d in docs:
         md = d.metadata or {}
-        txt = (d.page_content or "").lower()
-
-        # 1) se veio como 'convenio', preserve apenas os que casem convênio e (se houver) modalidade
-        if md.get("tipo") == "convenio":
-            if conv and md.get("convenio","") != conv:
+        if md.get("tipo") == "convenio" and _txt(md.get("convenio")) == conv_norm:
+            mod = (md.get("modalidade") or "").upper()
+            if not mod:
                 continue
-            if mod and md.get("modalidade","") != mod:
-                # Se não casou a modalidade, ainda podemos manter se a pergunta era vaga de convênio
-                if eh_pergunta_convenio("convênio"):  # heurística mínima
-                    pass
-                else:
-                    continue
-            filtrados.append(d)
-            continue
-
-        # 2) para documentos gerais: exigir que contenham a modalidade e, se existir, alguma palavra do alvo
-        if mod and mod not in txt:
-            # alguns documentos usam "RM - CRÂNIO" etc; tente detectar " rm " como fallback
-            if f" {mod} " not in txt and not txt.startswith(mod):
-                continue
-
-        if alvo:
-            if not any(a in txt for a in alvo):
-                # Deixa passar alguns genéricos quando a pergunta for muito vaga
-                if len(alvo) >= 1:
-                    continue
-
-        filtrados.append(d)
-
-    # fallback se filtrou demais
-    return filtrados if filtrados else docs
-
-# ---------------------- Debug helper ----------------------
-def debug_print_docs(title, documentos):
-    if not DEBUG:
-        return
-    print(f"\n===== {title} (total={len(documentos)}) =====")
-    for i, doc in enumerate(documentos, 1):
-        print(f"\n🔹 Documento #{i}")
-        print(f"📁 Origem: {doc.metadata.get('origem', 'desconhecida')}")
-        print(f"📑 Metadata: {doc.metadata}")
-        print(f"📄 Conteúdo:\n{doc.page_content}")
-
-# ----------------- Resumo convênio (existente) -----------------
-def resumo_convenio(conv: str) -> str:
-    conv_norm = conv.lower().strip()
-    docs = db.similarity_search(conv_norm, k=200, filter={"tipo": "convenio", "convenio": conv_norm})
-    cobertura = {}
-    for d in docs:
-        mod = (d.metadata or {}).get("modalidade", "").upper()
-        txt = (d.page_content or "").lower()
-        if not mod:
-            continue
-        if "cobertura: sim" in txt:
-            cobertura[mod] = True
-        elif "cobertura: não" in txt or "cobertura: nao" in txt:
-            cobertura.setdefault(mod, False)
+            txt = _txt(d.page_content)
+            if any(fr in txt for fr in ["não cobre", "nao cobre", "não realiza", "nao realiza", "não autorizado", "nao autorizado"]):
+                cobertura.setdefault(mod, False)
+            else:
+                cobertura[mod] = True  # assume que cobre se não constar negação
 
     ordem = ["RM","TC","ANGIO-RM","ANGIO-TC","TC (EXCETO ANGIO-TC)","EEG","ENMG","RX","US","POLISSONOGRAFIA",
              "RM DE MAMA","RM DE FACE","RM DE ÓRBITA","RM DE MASTOIDE"]
@@ -405,139 +393,169 @@ def resumo_convenio(conv: str) -> str:
         f"Não cobre: {', '.join(nao_cobertas) if nao_cobertas else '—'}\n"
     )
 
-# ----------------------- Modelo LLM -----------------------
+# =========================
+# Prompt e geração (Gemini)
+# =========================
+PROMPT_BASE = """
+Você é um assistente de agendamentos. Responda SOMENTE com base no CONTEXTO fornecido (não invente nada fora dele). Português do Brasil.
 
+Formato:
+- Primeira linha: resposta principal em 1 frase curta.
+- Até mais 3 linhas com condições essenciais (se houver).
+- Se não houver evidência clara no CONTEXTO, diga explicitamente: "Não localizado no material fornecido." (sem sugerir alternativas externas).
+- Quando citar código, use: "Código TUSS: <número>".
+- Quando citar convênio, use: "Sim/Não, o convênio <X> (não) cobre <Y>." e acrescente condições (ex.: sem contraste, idade mínima).
 
+Regras específicas:
+- Crianças/termos infantis: priorize orientações pediátricas do CONTEXTO. Nunca oriente medicação; diga que apenas o médico pode prescrever.
+- Convênios: se houver bloco de “cobertura de convênio”, use-o. Se houver conflito entre trechos, prefira o mais específico à pergunta.
+- Se múltiplos códigos/condições forem possíveis, faça UMA das opções:
+  (a) pergunte UMA clarificação curta (ex.: “É com contraste?”), OU
+  (b) se já houver as opções no CONTEXTO, liste-as em bullets (“- ”) com seus códigos TUSS, sem inventar nada.
+- Não misture preparo/código/indicação se não forem solicitados.
+- Se houver orientação de idade mínima e o caso indicar menor que o mínimo, oriente a não agendar e encaminhar para avaliação médica.
+- Se a PERGUNTA citar uma região específica (ex.: tórax, abdome, pelve, crânio), responda APENAS o código dessa região (não liste outras).
 
-# ====================== Loop CLI =========================
-while True:
-    pergunta = input("\n📩 Sua pergunta (ou 'sair'): ").strip()
-    if pergunta.lower() == "sair":
-        break
+Rastreabilidade:
+- Na última linha, inclua: "Fonte: <Origem>" utilizando o campo "📁 Origem: …" do CONTEXTO mais pertinente.
 
-    ent = extract_entities(pergunta)
+Agora responda à PERGUNTA usando estritamente o CONTEXTO.
 
-    # tamanho do contexto (perguntas mais complexas => k maior)
-    k = TOP_K_BASE if any(p in pergunta.lower() for p in [" e ", " com ", " e/ou ", "restrição", "acima de", "abaixo de"]) else max(6, TOP_K_BASE // 2)
-
-    # 1) busca bruta
-    docs_base = buscar_contexto_base(pergunta, k=k)
-    debug_print_docs("Contexto bruto (pós-busca)", docs_base)
-
-    # 2) se convênio + modalidade estiverem presentes, tente reforçar com buscas focadas
-    if ent["convenio"] and ent["modalidade"]:
-        q_boosts = [
-            f"{ent['convenio']} {ent['modalidade']} cobertura de convênio",
-            f"Convênio {ent['convenio']} cobre {ent['modalidade']}",
-            f"{ent['convenio']} {ent['modalidade']} autorização plano de saúde",
-            f"{ent['convenio']} {ent['modalidade']} cobre",
-        ]
-        cand = []
-        for q in q_boosts:
-            cand.extend(db.similarity_search(q, k=10))
-        # dedup
-        vistos = set()
-        cand = [c for c in cand if id(c) not in vistos and not vistos.add(id(c))]
-        # mantenha só docs de convênio
-        cand = [c for c in cand if (c.metadata or {}).get("tipo") == "convenio"]
-        # injeta no topo
-        docs_base = cand + [d for d in docs_base if d not in cand]
-
-    # ======================
-    # #3 pré-filtro por entidades extraídas
-    # ======================
-    docs_filtrados = prefiltrar_documentos(docs_base, ent)
-    debug_print_docs("Contexto filtrado (antes do prompt)", docs_filtrados)
-
-    # ======================
-    # 3.1 – Pós-processamento determinístico (cobertura e regras técnicas)
-    # ======================
-
-    # Aqui usamos a variável 'pergunta' do loop, não 'user_question'
-    entidades = parse_question(pergunta)
-
-    # Separa documentos de convênio
-    docs_convenio = [d for d in docs_filtrados if d.metadata.get("tipo") == "convenio"]
-
-    # Separa documentos de regras técnicas (apenas TC)
-    docs_regras_tc = [
-        d for d in docs_filtrados
-        if d.metadata.get("modalidade", "").lower() == "tc"
-        and (d.metadata.get("tipo") in {"regra_exame", "exame", "guia_exame", "orientacao", "preparo", "manual_exame"})
-    ]
-
-    # Converte para o formato aceito pelas funções auxiliares
-    conv_info = pick_convenio_tc([
-        {"metadata": d.metadata, "content": d.page_content} for d in docs_convenio
-    ])
-    regras_info = parse_regras_tc([
-        {"content": d.page_content} for d in docs_regras_tc
-    ])
-
-    # Decide agendamento
-    veredito = decide_agendamento(entidades, conv_info, regras_info)
-    veredito_formatado = formatar_veredito(veredito, entidades, conv_info, regras_info)
-
-    # Se o veredito indicar que não deve passar pelo LLM, responde e pula para próxima pergunta
-    if veredito["status"] in ("negado_convênio", "negado_técnico", "pendente_autorização", "faltam_dados"):
-        resposta_final = formatar_veredito(veredito, entidades, conv_info, regras_info)
-        print(resposta_final)
-        continue  # volta para o início do while
-
-    # ======================
-    # 4 – Checagem rápida no índice raso de convênios (opcional, não bloqueia)
-    # ======================
-    resumo = ""
-    if ent["convenio"]:
-        try:
-            resumo = resumo_convenio(ent["convenio"])
-        except Exception:
-            resumo = ""
-
-    # ======================
-    # 5 – Monta contexto final com origem (para transparência no console)
-    # ======================
-    contexto_console = "\n\n".join([
-        f"📄 Origem: {doc.metadata.get('origem', 'desconhecida')}\n{doc.page_content}"
-        for doc in docs_filtrados
-    ])
-
-    if DEBUG:
-        print("\n📑 Contexto que será enviado ao LLM:\n")
-        print(contexto_console)
-
-    # 6) Prompt reforçado: cruzar exame/preparo/convênio/médicos e citar todas as regras relevantes
-    prompt = f"""
-    Você é um **assistente de agendamentos para clínica**.
-
-    O motor de decisão JÁ determinou o VEREDITO sobre a possibilidade de agendar. 
-    Sua função é apenas **redigir a resposta final** de forma clara, usando o VEREDITO e, quando aplicável, complementando com informações do CONTEXTO.
-
-    VEREDITO (já decidido, não altere nem reinterprete):
-    {veredito_formatado} 
-
-    CONTEXTO:
-    {contexto_console}
-
-    INSTRUÇÕES:
-    1. **Não mude o veredito** — ele é a decisão final.
-    2. Se o veredito permitir agendamento, liste em linhas curtas as regras relevantes encontradas no CONTEXTO, seguindo esta ordem:
-    - Preparo/Orientações/Restrições (jejum, contraste, idade mínima, sedação, horários, equipamento 1.5T/3.0T).
-    - Cobertura e convênio.
-    - Médicos envolvidos/obrigatórios (se houver).
-    3. Se alguma informação não estiver no CONTEXTO, diga explicitamente "não especificado".
-    4. Seja objetivo e use no máximo 3–5 linhas além da frase inicial do veredito.
-    5. **Não invente** e não traga informações fora do CONTEXTO.
-
-    Formato da resposta:
-    - Primeira linha: o veredito (como está).
-    - Linhas seguintes: cada regra relevante em bullet points curtos.
-    
 CONTEXTO:
-{contexto_console}
+{contexto}
 
-Pergunta do atendente: {pergunta}
+Pergunta: {pergunta}
 """
-    msg = ask_gemini(prompt)
-    resposta = limpar_resposta_ia(msg or "")
-    print(f"\n🤖\n{resposta}")
+
+print("[DEBUG] buscando contexto...")
+
+def perguntar_gemini(pergunta: str, contexto: str) -> str:
+    print("[DEBUG] gemini: gerando...")
+    resp = GEMINI_MODEL.generate_content(
+        PROMPT_BASE.format(contexto=contexto, pergunta=pergunta)
+    )  # <- sem request_options
+    print("[DEBUG] gemini: ok")
+    texto = (resp.text or "").strip()
+    return limpar_resposta_ia(texto)
+
+# =========================
+# CLI
+# =========================
+def _precisa_clarificar(pergunta: str) -> Optional[str]:
+    p = pergunta.lower()
+    # TC de abdome sem detalhes
+    if ("tc" in p or "tomografia" in p) and "abdome" in p:
+        tem_total = "total" in p
+        tem_sup = "superior" in p
+        tem_contraste = ("com contraste" in p) or ("sem contraste" in p)
+        if not (tem_total or tem_sup) or not tem_contraste:
+            return "tc_abdome"
+    # angio-TC sem dizer arterial/venosa
+    if ("angio-tc" in p or "angio tc" in p) and not any(w in p for w in ["arterial","venosa"]):
+        return "angio_tc"
+    return None
+
+def _rodar_clarificacao(caso: str) -> Optional[str]:
+    try:
+        if caso == "tc_abdome":
+            tipo = input("⚠️ TC de abdome é TOTAL ou SUPERIOR? ").strip().lower()
+            contraste = input("É COM contraste ou SEM contraste? ").strip().lower()
+            tipo = "total" if "tot" in tipo else ("superior" if "sup" in tipo else tipo)
+            if not tipo: return None
+            if "sem" in contraste: contraste = "sem contraste"
+            elif "com" in contraste: contraste = "com contraste"
+            else: contraste = ""
+            return f"código de tc de abdome {tipo} {contraste}".strip()
+        if caso == "angio_tc":
+            artven = input("⚠️ Angio‑TC é ARTERIAL ou VENOSA? ").strip().lower()
+            if "art" in artven: return "código de angio-tc arterial"
+            if "ven" in artven: return "código de angio-tc venosa"
+            return None
+    except KeyboardInterrupt:
+        return None
+    return None
+
+if __name__ == "__main__":
+
+    while True:
+        pergunta = input("\n📩 Sua pergunta (ou 'sair'): ").strip()
+        if pergunta.lower() == "sair":
+            break
+
+        pergunta_lower = pergunta.lower()
+        conv_canon = next((v.lower() for k, v in CONVENIOS.items() if k in pergunta_lower), None)
+        mod_canon = next((canon.lower() for alias, canon in MOD_LOOKUP.items() if alias in pergunta_lower), None)
+
+        # Clarificação rápida para casos ambíguos
+        caso = _precisa_clarificar(pergunta)
+        if caso:
+            nova = _rodar_clarificacao(caso)
+            if nova:
+                pergunta = nova
+        k = 6 if any(p in pergunta_lower for p in [" e ", " com ", " e/ou ", "restrição", "acima de", "abaixo de"]) else 2
+        documentos = buscar_contexto(pergunta, k=k)
+
+        # reforço: se vier convênio + modalidade, prioriza convênio
+        if conv_canon and mod_canon:
+            querys = [
+                f"{conv_canon} {mod_canon} cobertura de convênio",
+                f"Convênio {conv_canon} cobre {mod_canon}",
+                f"{conv_canon} {mod_canon} autorização plano de saúde",
+                f"{conv_canon} {mod_canon} cobre",
+            ]
+            candidatos: List[_Doc] = []
+            for q in querys:
+                candidatos.extend(vertex_search(q, top_k=10))
+            # remove duplicados (texto + origem)
+            vistos = set()
+            uniq: List[_Doc] = []
+            for c in candidatos:
+                chave = (c.page_content, c.metadata.get("origem", ""))
+                if chave not in vistos:
+                    vistos.add(chave)
+                    uniq.append(c)
+
+            def ok(doc: _Doc, only_conv=None, only_mod=None):
+                md = doc.metadata or {}
+                if md.get("tipo") != "convenio":
+                    return False
+                if only_conv and (md.get("convenio","").lower() != only_conv.lower()):
+                    return False
+                if only_mod and (md.get("modalidade","").lower() != only_mod.lower()):
+                    return False
+                return True
+
+            docs_cov = [d for d in uniq if ok(d, conv_canon, mod_canon)] or \
+                       [d for d in uniq if ok(d, only_conv=conv_canon)] or \
+                       [d for d in uniq if ok(d, only_mod=mod_canon)]
+            if not docs_cov:
+                grandes = vertex_search(f"{conv_canon} {mod_canon}", top_k=30)
+                docs_cov = [d for d in grandes if ok(d)]
+            if docs_cov:
+                documentos = docs_cov + [d for d in documentos if d not in docs_cov]
+
+        contexto = "\n\n".join([
+            f"📁 Origem: {doc.metadata.get('origem', 'desconhecida')}\n{doc.page_content}"
+            for doc in documentos
+        ])
+
+        print("\n📄 Contexto retornado para a IA:\n")
+        print(contexto)
+
+        # 1) Gera a resposta
+        resposta = perguntar_gemini(pergunta, contexto)
+
+        # 2) Plano B: se o Gemini não achou, mas o contexto tem código TUSS
+        if "Não localizado" in resposta:
+            m = _re.search(r"\b(41\d{5})\b", contexto)  # ex.: 41xxxxx
+            if m:
+                resposta = f"Resposta: Código TUSS: {m.group(1)}.\nFonte: Vertex Search (contexto)"
+
+        # 3) Fallback de convênio: anexa um resumo se ainda não respondeu
+        if "Não localizado" in resposta and any(c in pergunta_lower for c in CONVENIOS.keys()):
+            conv_canon = next((v for k, v in CONVENIOS.items() if k in pergunta_lower), None)
+            if conv_canon:
+                resumo = resumo_convenio(conv_canon)
+                resposta = (resposta + "\n\n" + resumo).strip()
+
+        print(f"\n🤖\n{resposta}")
